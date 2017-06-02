@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<h:body> 
+		<h:form id="frm">
+				<p:messages closable="true"/>
+					<p:panelGrid columns="2" id="pnl">
+						<p:outputLabel value="Nome" for="nome"/>
+						<p:inputText value="#{perfilUsuarioBean.nome}" id="nome" required="true"/>
+					
+						<p:outputLabel value="Interesse" for="interesse" />
+						<p:selectOneMenu value="#{perfilUsuarioBean.interesse}" id="interesse" required="true"
+						                    converter="interesseConverter"
+						                    var="imagemInteresse"
+						                    filter="true"
+						                    filterMatchMode="startsWith"
+						                    style="width: 200px">
+								 
+						       <!-- 
+						       <f:selectItem itemLabel="Selecione" itemValue="#{null}" itemDisabled="true" />
+						       -->
+						        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" /> 
+								<f:selectItems value="#{perfilUsuarioBean.interesses}" var="inter" itemLabel="#{inter.descricao}" itemValue="#{inter}"/>
+						
+						<p:column>
+							<h:graphicImage library="imagens" name="#{imagemInteresse.nomeIcone}.jpg" />
+						</p:column>
+						<p:column >
+						    <h:outputText value="#{imagemInteresse.descricao}" />
+						</p:column>
+					
+						</p:selectOneMenu>
+					
+					<!-- SEM IMAGEM
+						<p:outputLabel value="Interesse" for="interesse" />
+						<p:selectOneMenu value="#{perfilUsuarioBean.interesse}" id="interesse" required="true"
+						                    converter="interesseConverter"
+						                    filter="true"
+						                    filterMatchMode="startsWith"
+						                    style="width: 200px">
+								 
+						      //  <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+								
+						        <f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+								<f:selectItems value="#{perfilUsuarioBean.interesses}" var="inter" itemLabel="#{inter.descricao}" itemValue="#{inter}"/>
+						
+					
+					
+						</p:selectOneMenu>
+					 -->	
+						 
+					
+
+					</p:panelGrid>
+					
+					
+					<p:commandButton value="Atualizar" update="@form" action="#{perfilUsuarioBean.atualizar()}"/>
+
+		</h:form>
+</h:body> 
+</html>
